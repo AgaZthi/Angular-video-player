@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #454343;
+}
+.player-wrapper {
+  max-width: 500px;
+  margin: auto;
+
+  video {
+    width: 100%;
+  }
+}
+ul {
+  padding: 0px;
+
+  li.playlist-item {
+    padding: 10px;
+    list-style: none;
+    background: #e6e6e6;
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+
+  li.playlist-item.selected {
+    background-color: rgb(158, 155, 155);
+  }
+}
+
+h3 {
+  color: black;
+}

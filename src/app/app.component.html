@@ -1,0 +1,110 @@
+<!-- <div>
+  <h3>Basic Video Player</h3>
+  <vg-player>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+
+    <vg-scrub-bar>
+      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+
+    <vg-controls>
+      <vg-play-pause></vg-play-pause>
+      <vg-playback-button></vg-playback-button>
+
+      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+      <vg-scrub-bar style="pointer-events: none"></vg-scrub-bar>
+
+      <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+      <vg-track-selector></vg-track-selector>
+      <vg-mute></vg-mute>
+      <vg-volume></vg-volume>
+
+      <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+    <video
+      [vgMedia]="$any(videoPlayer)"
+      #videoPlayer
+      controls
+      [src]="activeVideo.src"
+      id="singleVideo"
+      preload="auto"
+      crossorigin
+      (timeupdate)="updateProgressBar()"
+    ></video>
+    <div>
+      <input
+        type="range"
+        [(ngModel)]="trimStartTime"
+        min="0"
+        max="{{ videoDuration }}"
+        step="0.1"
+      />
+      <input
+        type="range"
+        [(ngModel)]="trimEndTime"
+        min="0"
+        max="{{ videoDuration }}"
+        step="0.1"
+      />
+    </div>
+    <div>
+      <button (click)="startTrim()">Start Trimming</button>
+      <button (click)="endTrim()">End Trimming</button>
+      <button (click)="playTrimmedVideo()">Play Trimmed Video</button>
+    </div>
+  </vg-player>
+  <ul>
+    <li
+      class="playlist-item"
+      *ngFor="let video of playlist; let $index = index"
+      (click)="onClickPlaylistVideo(video, $index)"
+      [class.selected]="video === activeVideo"
+    >
+      {{ video.title }}
+    </li>
+  </ul>
+</div> -->
+
+<div>
+  <video #videoPlayer controls (timeupdate)="updateProgressBar()">
+    <source src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div>
+    <input
+      type="range"
+      [(ngModel)]="trimStartTime"
+      min="0"
+      max="{{ videoDuration }}"
+      step="0.1"
+    />
+    <input
+      type="range"
+      [(ngModel)]="trimEndTime"
+      min="0"
+      max="{{ videoDuration }}"
+      step="0.1"
+    />
+  </div>
+  <div>
+    <!-- <button (click)="startTrim()">Start Trimming</button>
+    <button (click)="endTrim()">End Trimming</button> -->
+    <button (click)="toggleTrimming()">
+      {{ isTrimming ? "End Trimming" : "Start Trimming" }}
+    </button>
+    <button (click)="playTrimmedVideo()">Play Trimmed Video</button>
+  </div>
+  <div>
+    <div class="progress-bar-container">
+      <!-- <div class="progress-bar" [style.left.%]="calculateProgressWidth()"></div> -->
+      <div class="cutoff-start" [style.left.%]="calculateCutoffStart()"></div>
+      <div class="cutoff-end" [style.left.%]="calculateCutoffEnd()"></div>
+    </div>
+  </div>
+</div>
